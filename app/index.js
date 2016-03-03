@@ -12,7 +12,7 @@ var text = $("textarea");
 var reset = $(".reset");
 
 text.on("select", function () {
-    console.log(this.getSelection());
+    search(this.getSelection());
 });
 
 text.on("input", function () {
@@ -32,4 +32,13 @@ reset.on("click", function () {
 if (text.val() == "" && title.val() == "") {
     title.val(localStorage.getItem("title") ? localStorage.getItem("title") : "");
     text.text(localStorage.getItem("text") ? localStorage.getItem("text") : "");
+}
+
+var search = function (selection) {
+    $.ajax({
+        "url": "search",
+        "data": {"q":selection}
+    }).done(function (data) {
+       console.log(data);
+    });
 }
