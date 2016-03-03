@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.resources {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 25vw;
+
+    background: #454545;
+}
+
+.editor {
+    position: absolute;
+    top: 0;
+    left: 25vw;
+    width: 75vw;
+
+    padding: 4vh 5vw;
+}
+
+.editor .title {
+    width: 65vw;
+    display: block;
+
+    margin-bottom: 2vh;
+
+    font-size: 2rem;
+
+    border: none;
+}
+
+.editor textarea {
+    width: 65vw;
+    min-height: 50vh;
+
+    border: none;
+
+    font-size: 1.2rem;
+}
