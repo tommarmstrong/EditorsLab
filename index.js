@@ -10,8 +10,15 @@ app.get("/search", function (req,res) {
 
     console.log("Search for", text);
 
-    guardianSearch(text).then(function (json) {
-        res.send(json);
+    var guardian = guardianSearch(text).then(function (json) {
+        return {
+            "type": "guardian",
+            "results": json.response.results
+        };
+    });
+
+    Promise.all([guardian]).then(function (values) {
+        res.send(values);
     });
 });
 
@@ -23,7 +30,10 @@ app.listen(3000, function () {
 
 var guardianSearch = function (text) {
     return fetch("http://content.guardianapis.com/search?q=" + text +"&api-key=" + process.env.GUARDIAN_KEY)
+        .catch(function (err) {
+            console.log(err);
+        })
         .then(function (res) {
             return res.json();
-        })
+        });
 }
