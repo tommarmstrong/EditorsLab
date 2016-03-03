@@ -1,0 +1,22 @@
+{
+  "name": "editorslabproject",
+  "version": "1.0.0",
+  "description": "Connecting journalists to resources - people, stories, data - while they type",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommarmstrong/EditorsLab.git"
+  },
+  "author": "Passiona Cottee, Taylor Denny & Tommaso Armstrong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tommarmstrong/EditorsLab/issues"
+  },
+  "homepage": "https://github.com/tommarmstrong/EditorsLab#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
