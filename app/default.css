@@ -43,6 +43,12 @@
     font-size: 1.2rem;
 }
 
+.editor .reset {
+    display: block;
+    height: 30px;
+    width: 50px;
+}
+
 textarea:hover,
 input:hover,
 textarea:active,
