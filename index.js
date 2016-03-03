@@ -36,4 +36,4 @@ var guardianSearch = function (text) {
         .then(function (res) {
             return res.json();
         });
-}
+};

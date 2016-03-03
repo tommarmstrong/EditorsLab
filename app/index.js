@@ -42,3 +42,52 @@ var search = function (selection) {
        console.log(data);
     });
 }
+
+var displayResults = function (results) {
+
+};
+
+class ResourceList extends React.Component {
+    render() {
+        var itemArray = [{'title': 'hello'}];
+        return (
+            <div className="resourceList">
+                <h1>Resources</h1>
+                <Resource title="Test" items={itemArray} />
+            </div>
+        )
+    }
+
+}
+
+class Resource extends React.Component {
+    render() {
+
+        var itemList = this.props.items.map(function (item) {
+            return (
+                <Item title={item.title} />
+            )
+        });
+
+        return (
+            <div className="resource">
+                <h2>{this.props.title}</h2>
+                {itemList}
+            </div>
+        )
+    }
+}
+
+class Item extends React.Component {
+    render() {
+        return (
+            <div className="item">
+                <h3>{this.props.title}</h3>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <ResourceList />,document.getElementsByClassName('resources')[0]
+);
