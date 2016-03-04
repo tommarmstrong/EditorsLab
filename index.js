@@ -20,8 +20,15 @@ app.get("/search", function (req,res) {
 
     var uts = utsSearch(text);
 
-    Promise.all([guardian]).then(function (values) {
-        res.send(values);
+    Promise.all([guardian, uts]).then(function (values) {
+        var result = [];
+
+        for (var i = 0; i < values.length; i++) {
+            if (values[i].results.length > 0) {
+                result.push(values[i]);
+            }
+        }
+        res.send(result);
     });
 });
 
@@ -55,7 +62,7 @@ var guardianSearch = function (text) {
 
 var utsSearch = function (text) {
     var keywords = text.split(" ");
-    var hits = [{total: 50}, {total: 10}];
+    var hits = [];
 
     for (var i = 0; i < utsData.length; i++) {
         var found = {index: i, total: 0, keywords: []};
@@ -66,6 +73,8 @@ var utsSearch = function (text) {
             }
         }
         if (found.total > 0) {
+            found.title = utsData[i].Name;
+            found.url = utsData[i]["Source Url"];
             hits.push(found);
         }
     }
@@ -74,5 +83,8 @@ var utsSearch = function (text) {
         return a.total - b.total;
     });
 
-    console.log(JSON.stringify(hits))
+    return {
+        title: "UTS",
+        results: hits
+    };
 };
