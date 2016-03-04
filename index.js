@@ -53,7 +53,7 @@ app.listen(3000, function () {
 });
 
 var guardianSearch = function (text) {
-    return fetch("http://content.guardianapis.com/search?q=" + text +"&api-key=" + process.env.GUARDIAN_KEY)
+    return fetch("http://content.guardianapis.com/search?q=" + text +"&production-office=aus&api-key=" + process.env.GUARDIAN_KEY)
         .catch(function (err) {
             console.log(err);
         })
@@ -102,7 +102,7 @@ var newsSearch = function (text) {
 }
 
 var dataSearch = function (text) {
-    return fetch("http://demo.ckan.org/api/3/action/package_search?q=" + text)
+    return fetch("http://data.gov.au/api/3/action/package_search?q=" + text)
         .catch(function (err) {
             console.log(err);
         })
