@@ -2,6 +2,7 @@
 Connecting journalists to resources - people, stories, data - while they type
 
 An #EditorsLab Project by Passiona Cottee, Taylor Denny & Tommaso Armstrong
+Special thanks to the #EditorsLab team and to Ryan Hunt for News Corp API access
 
 ## The Problem
 Primary problem: Journalists spend a lot of time researching and looking for data, background, experts and sources.
