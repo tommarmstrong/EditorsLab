@@ -29,4 +29,5 @@ Journalists will have immediate access to resources which will allow them to dec
 
 ## Installation
 - Install dependancies ```npm install```
+- Rename ```.env.example``` to ```.env``` and add API Keys
 - Run ```npm start```
