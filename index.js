@@ -1,8 +1,7 @@
 var express = require('express');
 var fetch = require('node-fetch');
-require('dotenv').load()
-var utsData = JSON.parse(require('data/utsData.json'));
-
+require('dotenv').load();
+var utsData = require('./data/utsData.json');
 
 var app = express();
 
@@ -18,6 +17,8 @@ app.get("/search", function (req,res) {
             "results": json
         };
     });
+
+    var uts = utsSearch(text);
 
     Promise.all([guardian]).then(function (values) {
         res.send(values);
@@ -54,17 +55,24 @@ var guardianSearch = function (text) {
 
 var utsSearch = function (text) {
     var keywords = text.split(" ");
-    var hits = [];
+    var hits = [{total: 50}, {total: 10}];
 
     for (var i = 0; i < utsData.length; i++) {
-        hits.push({i: 0});
+        var found = {index: i, total: 0, keywords: []};
         for (var j = 0; j < keywords.length; j++) {
             if (utsData[i].Expertise.indexOf(keywords[j]) > -1) {
-                hits[i]++;
+                found.keywords.push(keywords[j]);
+                found.total++;
             }
         }
-
+        if (found.total > 0) {
+            hits.push(found);
+        }
     }
+
+    hits.sort(function (a,b) {
+        return a.total - b.total;
+    });
 
     console.log(JSON.stringify(hits))
 };
