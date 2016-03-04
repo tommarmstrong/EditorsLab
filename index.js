@@ -27,7 +27,14 @@ app.get("/search", function (req,res) {
 
     var uts = utsSearch(text);
 
-    Promise.all([guardian, news, uts]).then(function (values) {
+    var data = dataSearch(text).then(function (json) {
+        return {
+            "title": "data.gov.au",
+            "results": json
+        }
+    });
+
+    Promise.all([guardian, news, uts,data]).then(function (values) {
         var result = [];
 
         for (var i = 0; i < values.length; i++) {
@@ -92,6 +99,28 @@ var newsSearch = function (text) {
         .catch(function (err) {
             console.log(err)
         });
+}
+
+var dataSearch = function (text) {
+    return fetch("http://demo.ckan.org/api/3/action/package_search?q=" + text)
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (json) {
+            var results = [];
+
+            json.result.results.map(function (result) {
+               results.push({
+                   title: result.title,
+                   url: result.resources[0].url
+               })
+            });
+
+            return results;
+        })
 }
 
 var utsSearch = function (text) {
