@@ -1,6 +1,8 @@
 var express = require('express');
 var fetch = require('node-fetch');
 require('dotenv').load()
+var utsData = JSON.parse(require('data/utsData.json'));
+
 
 var app = express();
 
@@ -48,4 +50,21 @@ var guardianSearch = function (text) {
 
             return results;
         });
+};
+
+var utsSearch = function (text) {
+    var keywords = text.split(" ");
+    var hits = [];
+
+    for (var i = 0; i < utsData.length; i++) {
+        hits.push({i: 0});
+        for (var j = 0; j < keywords.length; j++) {
+            if (utsData[i].Expertise.indexOf(keywords[j]) > -1) {
+                hits[i]++;
+            }
+        }
+
+    }
+
+    console.log(JSON.stringify(hits))
 };
