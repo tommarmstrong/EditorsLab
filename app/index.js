@@ -26,7 +26,7 @@ title.on("input", function () {
 
 reset.on("click", function () {
     title.val("");
-    text.text("");
+    text.val("");
 });
 
 if (text.val() == "" && title.val() == "") {
