@@ -42,10 +42,15 @@ li {
     list-style-position: inside;
 }
 
-a {
+p, a {
     color: black;
     font: 300 0.9rem "Helvetica";
     text-decoration: none;
+}
+
+.zero {
+    color: white;
+    padding-top: 20px;
 }
 
 .editor {
@@ -70,7 +75,7 @@ a {
 
 .editor textarea {
     width: 65vw;
-    min-height: 50vh;
+    min-height: 75vh;
 
     border: none;
 
@@ -81,6 +86,14 @@ a {
     display: block;
     height: 30px;
     width: 50px;
+}
+
+.footer {
+    padding-top: 20px;
+}
+
+.footer a {
+    text-decoration: underline;
 }
 
 textarea:hover,

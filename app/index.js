@@ -53,9 +53,15 @@ var displayResults = function (results) {
 
 class ResourceList extends React.Component {
     render() {
-        var resources = this.props.resources.map(function (resource, i) {
-            return <Resource key={i} title={resource.title} items={resource.results} />
-        });
+        if (this.props.resources.length !== 0) {
+            var resources = this.props.resources.map(function (resource, i) {
+                return <Resource key={i} title={resource.title} items={resource.results} />
+            });
+        }
+        else {
+            var resources = <p className="zero">Highlight some text to find related resources</p>;
+        }
+
 
         return (
             <div className="resourceList">
@@ -70,9 +76,16 @@ class Resource extends React.Component {
     render() {
 
         var itemList = this.props.items.map(function (item, i) {
-            return (
-                <Item key={i} title={item.title} url={item.url} />
-            )
+            if (item.subtitle !== undefined) {
+                return (
+                    <Item key={i} title={item.title} subtitle={item.subtitle} url={item.url} />
+                )
+            }
+            else {
+                return (
+                    <Item key={i} title={item.title} url={item.url} />
+                )
+            }
         });
 
         return (
@@ -87,9 +100,18 @@ class Resource extends React.Component {
 class Item extends React.Component {
     render() {
 
-        return (
-            <li className="item"><a target="_blank" href={this.props.url}>{this.props.title}</a></li>
-        )
+        if (this.props.subtitle !== undefined) {
+            return (
+                <li className="item"><a target="_blank" href={this.props.url}>{this.props.title} ({this.props.subtitle})</a></li>
+            )
+        }
+
+        else {
+            return (
+                <li className="item"><a target="_blank" href={this.props.url}>{this.props.title}</a></li>
+            )
+        }
+
     }
 }
 
