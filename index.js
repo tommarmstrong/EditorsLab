@@ -12,8 +12,8 @@ app.get("/search", function (req,res) {
 
     var guardian = guardianSearch(text).then(function (json) {
         return {
-            "type": "guardian",
-            "results": json.response.results
+            "title": "The Guardian",
+            "results": json
         };
     });
 
@@ -35,5 +35,17 @@ var guardianSearch = function (text) {
         })
         .then(function (res) {
             return res.json();
+        })
+        .then(function (json) {
+            var results = [];
+
+            json.response.results.map(function (result) {
+               results.push({
+                   title: result.webTitle,
+                   url: result.webUrl
+               });
+            });
+
+            return results;
         });
 };

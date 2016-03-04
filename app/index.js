@@ -39,33 +39,39 @@ var search = function (selection) {
         "url": "search",
         "data": {"q":selection}
     }).done(function (data) {
-       console.log(data);
+        console.log("Search completed");
+        displayResults(data);
     });
 }
 
 var displayResults = function (results) {
-
+    console.log("Updating react");
+    ReactDOM.render(
+        <ResourceList resources={results} />,document.getElementsByClassName('resources')[0]
+    );
 };
 
 class ResourceList extends React.Component {
     render() {
-        var itemArray = [{'title': 'hello'}];
+        var resources = this.props.resources.map(function (resource, i) {
+            return <Resource key={i} title={resource.title} items={resource.results} />
+        });
+
         return (
             <div className="resourceList">
                 <h1>Resources</h1>
-                <Resource title="Test" items={itemArray} />
+                {resources}
             </div>
         )
     }
-
 }
 
 class Resource extends React.Component {
     render() {
 
-        var itemList = this.props.items.map(function (item) {
+        var itemList = this.props.items.map(function (item, i) {
             return (
-                <Item title={item.title} />
+                <Item key={i} title={item.title} url={item.url} />
             )
         });
 
@@ -83,11 +89,14 @@ class Item extends React.Component {
         return (
             <div className="item">
                 <h3>{this.props.title}</h3>
+                <a href={this.props.url}>View</a>
             </div>
         )
     }
 }
 
+var resources = [];
+
 ReactDOM.render(
-    <ResourceList />,document.getElementsByClassName('resources')[0]
+    <ResourceList resources={resources} />,document.getElementsByClassName('resources')[0]
 );

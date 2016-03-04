@@ -12,6 +12,8 @@
     width: 25vw;
 
     background: #454545;
+
+    overflow: scroll;
 }
 
 .editor {
