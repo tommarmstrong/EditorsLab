@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.resources {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 25vw;
+
+    padding: 4vh 20px;
+
+    background: #454545;
+
+    overflow: scroll;
+}
+
+.resource {
+    background: white;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+h1 {
+    font: 300 1.2rem "Helvetica";
+    color: white;
+}
+
+h2 {
+    font: 300 1.1rem "Helvetica";
+    color: black;
+}
+
+li {
+    list-style-position: inside;
+}
+
+a {
+    color: black;
+    font: 300 0.9rem "Helvetica";
+    text-decoration: none;
+}
+
+.editor {
+    position: absolute;
+    top: 0;
+    left: 25vw;
+    width: 75vw;
+
+    padding: 4vh 5vw;
+}
+
+.editor .title {
+    width: 65vw;
+    display: block;
+
+    margin-bottom: 2vh;
+
+    font-size: 2rem;
+
+    border: none;
+}
+
+.editor textarea {
+    width: 65vw;
+    min-height: 50vh;
+
+    border: none;
+
+    font-size: 1.2rem;
+}
+
+.editor .reset {
+    display: block;
+    height: 30px;
+    width: 50px;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
