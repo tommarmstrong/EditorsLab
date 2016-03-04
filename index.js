@@ -18,9 +18,16 @@ app.get("/search", function (req,res) {
         };
     });
 
+    var news = newsSearch(text).then(function (json) {
+        return {
+            "title": "News Corp.",
+            "results": json
+        };
+    });
+
     var uts = utsSearch(text);
 
-    Promise.all([guardian, uts]).then(function (values) {
+    Promise.all([guardian, news, uts]).then(function (values) {
         var result = [];
 
         for (var i = 0; i < values.length; i++) {
@@ -59,6 +66,33 @@ var guardianSearch = function (text) {
             return results;
         });
 };
+
+var newsSearch = function (text) {
+    return fetch("http://cdn.newsapi.com.au/content/v2/?api_key=" + process.env.NEWS_KEY + "&query=" + text + " AND contentType:NEWS_STORY")
+        .catch(function (err) {
+            console.log(err);
+        })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (json) {
+            var results = [];
+
+            json.results.map(function (result) {
+                if (result.domainLinks[0] !== undefined && result.domainLinks[0].link.indexOf("cdn.newsapi.com.au") < 0) {
+                    results.push({
+                        title: result.title,
+                        url: result.domainLinks[0].link
+                    });
+                }
+            });
+
+            return results;
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+}
 
 var utsSearch = function (text) {
     var keywords = text.split(" ");
