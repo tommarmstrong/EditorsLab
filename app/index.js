@@ -78,7 +78,7 @@ class Resource extends React.Component {
         return (
             <div className="resource">
                 <h2>{this.props.title}</h2>
-                {itemList}
+                <ul>{itemList}</ul>
             </div>
         )
     }
@@ -86,11 +86,9 @@ class Resource extends React.Component {
 
 class Item extends React.Component {
     render() {
+
         return (
-            <div className="item">
-                <h3>{this.props.title}</h3>
-                <a href={this.props.url}>View</a>
-            </div>
+            <li className="item"><a target="_blank" href={this.props.url}>{this.props.title}</a></li>
         )
     }
 }
